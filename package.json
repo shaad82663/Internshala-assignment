@@ -1,0 +1,23 @@
+{
+  "name": "avtaar",
+  "version": "1.0.0",
+  "description": "Avataar Assignments Coded By Mohd Shadab(7302946970)",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon back-end/server.js",
+    "dev": "SET NODE_ENV=DEVELOPMENT& nodemon back-end/server.js",
+    "prod": "SET NODE_ENV=PRODUCTION& nodemon back-end/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.12",
+    "nodemon": "^2.0.15",
+    "validator": "^13.7.0"
+  }
+}
