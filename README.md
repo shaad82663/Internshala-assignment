@@ -4,6 +4,11 @@
 
 You'll need to have node.js installed in the machine. Git Bash is suggested as a terminal
 
+- Clone the repository using following command (git bash):
+```sh
+ git clone https://github.com/shaad82663/Internshala-assignment
+```
+
 - After clonning the repository, Navigate to the project folder by running following command in terminal:
 ```sh
  cd Internshala-assignment/
@@ -22,7 +27,7 @@ npm run start
 - The ouput in the termnal will be :
 >Listening Server over port 4000 in DEVELOMENT mode.
 >
->mongoDB Database is connected with mongodb://localhost:27017/avtaar-mohd-shadab
+>mongoDB Database is connected with mongodb://localhost:27017/internshala-assignment
 
 # REST API
 
@@ -98,9 +103,9 @@ The REST API used in the code is described below.
 
 ### Request
 
-`GET /api/v1/user/users-details`
+`GET /api/v1/user/users`
 
-     http://localhost:4000/api/v1/user/users-details
+     http://localhost:4000/api/v1/user/users
 
 #### Sample Request (JSON)
   
@@ -139,7 +144,7 @@ The REST API used in the code is described below.
 
 `POST /api/v1/product/new`
 
-     http://localhost:4000/api/v1/product/new  
+     http://localhost:4000/api/v1/product/new
 
 
 #### Sample Request (JSON)
