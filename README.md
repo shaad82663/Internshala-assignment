@@ -1,7 +1,4 @@
-### NOTE :
-Front End functionality is not added yet.
-
-# avtaar-capstone 
+# Internshala - Assignment (Mohd Shadab)
 
 ##  Steps to run the code (Windows OS)
 
@@ -9,7 +6,7 @@ You'll need to have node.js installed in the machine. Git Bash is suggested as a
 
 - After clonning the repository, Navigate to the project folder by running following command in terminal:
 ```sh
- cd avtaar-capstone/
+ cd Internshala-assignment/
 ```
 
 - Run the following command to install the all the node.js packages that are used in the code.
@@ -35,18 +32,17 @@ The REST API used in the code is described below.
 
 ### Request
 
-`POST /api/v1/register`
+`POST /api/v1/user/register`
 
-     http://localhost:4000/api/v1/register
+     http://localhost:4000/api/v1/user/register
 
 #### Sample Request (JSON)
   
     {
-    "name" : "Mohd Shadab",
-    "age" : 20,
-    "gender" : "MALE",
-    "email" : "shaad82663@gmail.com",
-    "password" : "122333Shaad#"
+     "firstname" : "Mohd",
+     "lastname" : "Shadab",
+     "username" : "shaad123",
+     "password" : "123456"
     }
     
 ### Response
@@ -60,15 +56,15 @@ The REST API used in the code is described below.
 
 ### Request
 
-`POST /api/v1/login`
+`POST /api/v1/user/login`
 
-     http://localhost:4000/api/v1/login
+     http://localhost:4000/api/v1/user/login
 
 #### Sample Request (JSON)
   
     {
-    "email" : "shaad82663@gmail.com",
-    "password" : "122333Shaad#"
+    "username" : "shaad123",
+    "password" : "123456"
     }
     
 ### Response
@@ -78,13 +74,52 @@ The REST API used in the code is described below.
     token : token
     user : {...user}    
     
+## Get user details (Protected : Login First)
+
+### Request
+
+`GET /api/v1/user/user-details`
+
+     http://localhost:4000/api/v1/user/user-details
+
+#### Sample Request (JSON)
+  
+    {
+    "username" : "shaad123"
+    }
+    
+### Response
+  
+    HTTP/1.1 200 OK
+    success : true
+    user : {...user}    
+    
+## Fetch users list  (Protected : Login First)
+
+### Request
+
+`GET /api/v1/user/users-details`
+
+     http://localhost:4000/api/v1/user/users-details
+
+#### Sample Request (JSON)
+  
+    {}
+    
+### Response
+  
+    HTTP/1.1 200 OK
+    success : true
+    users : [users]      
+    
+    
 ## Logout
 
 ### Request
 
-`GET /api/v1/logout`
+`GET /api/v1/user/logout`
 
-     http://localhost:4000/api/v1/logout
+     http://localhost:4000/api/v1/user/logout
 
 #### Sample Request (JSON)
   
@@ -96,31 +131,31 @@ The REST API used in the code is described below.
     success : true,
     message : "Logged Out"
     
-## Add Event (Protected Route : Login first)
+    
+    
+## Add Product (Protected Route : Login first)
 
 ### Request
 
-`POST /api/v1/event/new`
+`POST /api/v1/product/new`
 
-     http://localhost:4000/api/v1/event/new  
+     http://localhost:4000/api/v1/product/new  
 
 
 #### Sample Request (JSON)
 
     {
-     "name" : "Cricket",
+     "name" : "Cricket Ball",
      "description" : "myDesc",
-     "location" : "Delhi 12/32 Sk-col",
-     "uid" : "61b4458d9bf1b284025e9987",
-     "startDate" : "2021-12-01",
-     "endDate" : "2021-12-15"
+     "price" : 299,
+     "quantity" : 10
     }
 
 ### Response
   
         HTTP/1.1 200 OK
         success : true,
-        event : {...event}
+        product : {...product}
         
 ### Error (In case of not logged in user) //Same for other protected routes.
        {
@@ -132,13 +167,13 @@ The REST API used in the code is described below.
          "stack" : {error-stack}
        }
     
-## Get all the events for today (Protected Route : Login first)
+## Fetch all products(Protected Route : Login first)
 
 ### Request
 
-`GET /api/v1/events/today`
+`GET /api/v1/products`
 
-     http://localhost:4000/api/v1/events/today  
+     http://localhost:4000/api/v1/products
      
 #### Sample Request (JSON) 
   
@@ -148,73 +183,10 @@ The REST API used in the code is described below.
   
         HTTP/1.1 200 OK
         success : true,
-        count : events.length,
-        events : [...events]
+        count : products.length,
+        products : [...products]
     
-
         
-## Get all users for list of uid  
-
-### Request
-
-`GET /api/v1/users`
-
-     http://localhost:4000/api/v1/users
-
-#### Sample Request (JSON)
-  
-    {
-    "uid" : ["6193d55e635304f71aa4ea55", "6193d701f37175bbaa345a0f"]
-    } 
-
-### Response
-  
-         HTTP/1.1 200 OK
-         success : true,
-         users : {...users}
-                 
-         
-## Get the all the events for given uid (Protected Route : Login first)
-
-### Request
-
-`GET /api/v1/events`
-
-     http://localhost:4000/api/v1/events
-     
-#### Sample Request (JSON)
-  
-    {
-    "uid" : "6193d55e635304f71aa4ea55"
-    } 
-
-### Response
-  
-         HTTP/1.1 200 OK
-         success : true,
-         count : eventsForUid.length,
-         eventsForUid : {...eventsForUid}   
-                   
-         
-## Get all events for the next 7 days
-
-### Request
-
-`GET /api/v1/events/week`
-
-     http://localhost:4000/api/v1/events/week
-     
-#### Sample Request (JSON)
-  
-    {} //NO INPUT REQUIRED      
-     
-### Response
-  
-         HTTP/1.1 200 OK
-        success : true,
-        count : events.length,
-        events : {...events}    
-
 
 ## Installation
 
