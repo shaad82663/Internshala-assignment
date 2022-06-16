@@ -9,7 +9,7 @@ const sendToken = require("../utils/jwttoken");
 
 const ErrorHandler = require('../utils/errorHandler');
 
-//Register user   POST => /api/v1/user/register
+//Register user    => /api/v1/user/register
 exports.registerUser = catchAsyncErrors (async (req, res, next) => {
   const {name, email, password} = req.body;
 
@@ -20,29 +20,28 @@ exports.registerUser = catchAsyncErrors (async (req, res, next) => {
 
 //Login user   => /api/v1/user/login
 exports.logInUser = catchAsyncErrors( async (req, res, next) => {
-    const {email, password} = req.body;
+    const {username, password} = req.body;
  
-    if(!email || !password) {
-        return next(new ErrorHandler("Please enter email and password", 400));
+    if(!username || !password) {
+        return next(new ErrorHandler("Please enter username and password", 400));
     }  
 
-    const user = await User.findOne({email}).select('+password');
+    const user = await User.findOne({username}).select('+password');
     
     if(!user) {
-       return next(new ErrorHandler("Invalid email or password",401));
+       return next(new ErrorHandler("Invalid username or password",401));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
     console.log(isPasswordMatched)
     if(!isPasswordMatched){
-        console.log("password not matched");
-        return next(new ErrorHandler("Invalid email or password"), 401);
+        return next(new ErrorHandler("Invalid username or password"), 401);
     }
 
     sendToken(user ,200 ,res); 
 })
 
-//Logout user => /api/v1/logout
+//Logout user => /api/v1/user/logout
 exports.logout = catchAsyncErrors( async (req, res, next) => {
     res.cookie('token', null, {
         expires : new Date(Date.now()),
@@ -55,15 +54,29 @@ exports.logout = catchAsyncErrors( async (req, res, next) => {
     })
 })
 
+//Get specific user's details   /api/v1/user/user-details
+exports.getUserDetails = catchAsyncErrors (async (req, res, next) => {
+    const username = req.body.username;
+    const user = await User.findOne({'username' : username});
 
-//To get all users for a list of uid     GET =>  /api/v1/users
+    if(!user) {
+        return next(new ErrorHandler("Username does not exist",401));
+     }
+
+    res.status(200).json({
+        success : true,
+        user
+    })
+})
+
+//Get all users' details   /api/v1/users/user-details
 exports.getUsers = catchAsyncErrors (async (req, res, next) => {
-    const ids = req.body.uid;
-    const users = await User.find({'_id' : {$in : ids} });
-
+    const users = await User.find({});
+    if(!users) {
+        return next(new ErrorHandler("No user found",401));
+     }
     res.status(200).json({
         success : true,
         users
     })
 })
-

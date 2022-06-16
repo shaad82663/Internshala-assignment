@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 //Importing Routes
 const users = require('./routes/user');
-const events = require('./routes/event');
+const events = require('./routes/product');
 
  //Routes root URL : http://localhost:4000/api/v1
 app.use('/api/v1', users);

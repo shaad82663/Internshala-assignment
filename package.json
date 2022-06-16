@@ -1,7 +1,7 @@
 {
   "name": "avtaar",
   "version": "1.0.0",
-  "description": "Avataar Assignments Coded By Mohd Shadab(7302946970)",
+  "description": "Intershala Assignments Coded By Mohd Shadab ",
   "main": "server.js",
   "scripts": {
     "start": "nodemon back-end/server.js",
